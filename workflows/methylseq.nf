@@ -4,7 +4,14 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-def summary_params = NfcoreSchema.paramsSummaryMap(workflow, params)
+// latest version
+include { paramsSummaryLog; paramsSummaryMap; fromSamplesheet } from 'plugin/nf-validation'
+def summary_params = paramsSummaryMap(workflow, params)
+
+// For 22.04.3
+// def summary_params = NfcoreSchema.paramsSummaryMap(workflow, params)
+
+
 WorkflowMethylseq.initialise(params, log)
 
 /*
@@ -78,7 +85,7 @@ workflow METHYLSEQ {
     // Create input channel from input file provided through params.input
     //
     Channel
-        .fromSamplesheet("input")
+        .fromSamplesheet('input')
         .map {
             meta, fastq_1, fastq_2 ->
             if (!fastq_2) {
