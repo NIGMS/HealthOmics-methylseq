@@ -1,0 +1,318 @@
+{
+    "input": {
+        "description": "Path to comma-separated file containing information about the samples in the experiment.",
+        "optional": false
+    },
+    "outdir": {
+        "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
+        "optional": false
+    },
+    "email": {
+        "description": "Email address for completion summary.",
+        "optional": true
+    },
+    "multiqc_title": {
+        "description": "MultiQC report title. Printed as page header, used for filename if not otherwise specified.",
+        "optional": true
+    },
+    "test_data_base": {
+        "description": "Base path / URL for data used in the test profiles",
+        "optional": true
+    },
+    "save_reference": {
+        "description": "Save reference(s) to results directory",
+        "optional": true
+    },
+    "save_align_intermeds": {
+        "description": "Save aligned intermediates to results directory",
+        "optional": true
+    },
+    "unmapped": {
+        "description": "Bismark only - Save unmapped reads to FastQ files",
+        "optional": true
+    },
+    "save_trimmed": {
+        "description": "Save trimmed reads to results directory.",
+        "optional": true
+    },
+    "genome": {
+        "description": "Name of iGenomes reference.",
+        "optional": true
+    },
+    "fasta": {
+        "description": "Path to FASTA genome file",
+        "optional": true
+    },
+    "fasta_index": {
+        "description": "Path to Fasta index file.",
+        "optional": true
+    },
+    "bismark_index": {
+        "description": "Path to a directory containing a Bismark reference index.",
+        "optional": true
+    },
+    "bwa_meth_index": {
+        "description": "bwameth index filename base",
+        "optional": true
+    },
+    "igenomes_base": {
+        "description": "Directory / URL base for iGenomes references.",
+        "optional": true
+    },
+    "igenomes_ignore": {
+        "description": "Do not load the iGenomes reference config.",
+        "optional": true
+    },
+    "aligner": {
+        "description": "Alignment tool to use.",
+        "optional": false
+    },
+    "comprehensive": {
+        "description": "Output information for all cytosine contexts.",
+        "optional": true
+    },
+    "pbat": {
+        "description": "Preset for working with PBAT libraries.",
+        "optional": true
+    },
+    "rrbs": {
+        "description": "Turn on if dealing with MspI digested material.",
+        "optional": true
+    },
+    "slamseq": {
+        "description": "Run bismark in SLAM-seq mode.",
+        "optional": true
+    },
+    "em_seq": {
+        "description": "Preset for EM-seq libraries.",
+        "optional": true
+    },
+    "single_cell": {
+        "description": "Trimming preset for single-cell bisulfite libraries.",
+        "optional": true
+    },
+    "accel": {
+        "description": "Trimming preset for the Accel kit.",
+        "optional": true
+    },
+    "cegx": {
+        "description": "Trimming preset for the CEGX bisulfite kit.",
+        "optional": true
+    },
+    "epignome": {
+        "description": "Trimming preset for the Epignome kit.",
+        "optional": true
+    },
+    "zymo": {
+        "description": "Trimming preset for the Zymo kit.",
+        "optional": true
+    },
+    "clip_r1": {
+        "description": "Trim bases from the 5' end of read 1 (or single-end reads).",
+        "optional": true
+    },
+    "clip_r2": {
+        "description": "Trim bases from the 5' end of read 2 (paired-end only).",
+        "optional": true
+    },
+    "three_prime_clip_r1": {
+        "description": "Trim bases from the 3' end of read 1 AFTER adapter/quality trimming.",
+        "optional": true
+    },
+    "three_prime_clip_r2": {
+        "description": "Trim bases from the 3' end of read 2 AFTER adapter/quality trimming",
+        "optional": true
+    },
+    "nextseq_trim": {
+        "description": "Trim bases below this quality value from the 3' end of the read, ignoring high-quality G bases",
+        "optional": true
+    },
+    "non_directional": {
+        "description": "Run alignment against all four possible strands.",
+        "optional": true
+    },
+    "cytosine_report": {
+        "description": "Output stranded cytosine report, following Bismark's bismark_methylation_extractor step.",
+        "optional": true
+    },
+    "relax_mismatches": {
+        "description": "Turn on to relax stringency for alignment (set allowed penalty with --num_mismatches).",
+        "optional": true
+    },
+    "num_mismatches": {
+        "description": "0.6 will allow a penalty of bp * -0.6 - for 100bp reads (bismark default is 0.2)",
+        "optional": true
+    },
+    "meth_cutoff": {
+        "description": "Specify a minimum read coverage to report a methylation call",
+        "optional": true
+    },
+    "no_overlap": {
+        "description": "Ignore read 2 methylation when it overlaps read 1",
+        "optional": true
+    },
+    "ignore_r1": {
+        "description": "Ignore methylation in first n bases of 5' end of R1",
+        "optional": true
+    },
+    "ignore_r2": {
+        "description": "Ignore methylation in first n bases of 5' end of R2",
+        "optional": true
+    },
+    "ignore_3prime_r1": {
+        "description": "Ignore methylation in last n bases of 3' end of R1",
+        "optional": true
+    },
+    "ignore_3prime_r2": {
+        "description": "Ignore methylation in last n bases of 3' end of R2",
+        "optional": true
+    },
+    "known_splices": {
+        "description": "Supply a .gtf file containing known splice sites (bismark_hisat only).",
+        "optional": true
+    },
+    "local_alignment": {
+        "description": "Allow soft-clipping of reads (potentially useful for single-cell experiments).",
+        "optional": true
+    },
+    "minins": {
+        "description": "The minimum insert size for valid paired-end alignments.",
+        "optional": true
+    },
+    "maxins": {
+        "description": "The maximum insert size for valid paired-end alignments.",
+        "optional": true
+    },
+    "nomeseq": {
+        "description": "Sample is NOMe-seq or NMT-seq. Runs coverage2cytosine.",
+        "optional": true
+    },
+    "min_depth": {
+        "description": "Specify a minimum read coverage for MethylDackel to report a methylation call.",
+        "optional": true
+    },
+    "ignore_flags": {
+        "description": "MethylDackel - ignore SAM flags",
+        "optional": true
+    },
+    "methyl_kit": {
+        "description": "Save files for use with methylKit",
+        "optional": true
+    },
+    "bamqc_regions_file": {
+        "description": "A GFF or BED file containing the target regions which will be passed to Qualimap/Bamqc.",
+        "optional": true
+    },
+    "skip_trimming": {
+        "description": "Skip read trimming.",
+        "optional": true
+    },
+    "skip_deduplication": {
+        "description": "Skip deduplication step after alignment.",
+        "optional": true
+    },
+    "skip_multiqc": {
+        "description": "Skip MultiQC",
+        "optional": true
+    },
+    "custom_config_version": {
+        "description": "Git commit id for Institutional configs.",
+        "optional": true
+    },
+    "custom_config_base": {
+        "description": "Base directory for Institutional configs.",
+        "optional": true
+    },
+    "config_profile_name": {
+        "description": "Institutional config name.",
+        "optional": true
+    },
+    "config_profile_description": {
+        "description": "Institutional config description.",
+        "optional": true
+    },
+    "config_profile_contact": {
+        "description": "Institutional config contact information.",
+        "optional": true
+    },
+    "config_profile_url": {
+        "description": "Institutional config URL link.",
+        "optional": true
+    },
+    "max_cpus": {
+        "description": "Maximum number of CPUs that can be requested for any single job.",
+        "optional": true
+    },
+    "max_memory": {
+        "description": "Maximum amount of memory that can be requested for any single job.",
+        "optional": true
+    },
+    "max_time": {
+        "description": "Maximum amount of time that can be requested for any single job.",
+        "optional": true
+    },
+    "ecr_registry": {
+        "description": "Amazon ECR registry to use for container images",
+        "optional": true
+    },
+    "help": {
+        "description": "Display help text.",
+        "optional": true
+    },
+    "version": {
+        "description": "Display version and exit.",
+        "optional": true
+    },
+    "publish_dir_mode": {
+        "description": "Method used to save pipeline results to output directory.",
+        "optional": true
+    },
+    "email_on_fail": {
+        "description": "Email address for completion summary, only when pipeline fails.",
+        "optional": true
+    },
+    "plaintext_email": {
+        "description": "Send plain-text email instead of HTML.",
+        "optional": true
+    },
+    "max_multiqc_email_size": {
+        "description": "File size limit when attaching MultiQC reports to summary emails.",
+        "optional": true
+    },
+    "monochrome_logs": {
+        "description": "Do not use coloured log outputs.",
+        "optional": true
+    },
+    "hook_url": {
+        "description": "Incoming hook URL for messaging service",
+        "optional": true
+    },
+    "multiqc_config": {
+        "description": "Custom config file to supply to MultiQC.",
+        "optional": true
+    },
+    "multiqc_logo": {
+        "description": "Custom logo file to supply to MultiQC. File name must also be set in the MultiQC config file",
+        "optional": true
+    },
+    "multiqc_methods_description": {
+        "description": "Custom MultiQC yaml file containing HTML including a methods description.",
+        "optional": true
+    },
+    "validate_params": {
+        "description": "Boolean whether to validate parameters against the schema at runtime",
+        "optional": true
+    },
+    "validationShowHiddenParams": {
+        "description": "Show all params when using `--help`",
+        "optional": true
+    },
+    "validationFailUnrecognisedParams": {
+        "description": "Validation of parameters fails when an unrecognised parameter is found.",
+        "optional": true
+    },
+    "validationLenientMode": {
+        "description": "Validation of parameters in lenient more.",
+        "optional": true
+    }
+}
