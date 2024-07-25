@@ -4,8 +4,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { paramsSummaryLog; paramsSummaryMap; fromSamplesheet } from 'plugin/nf-validation'
-def summary_params = paramsSummaryMap(workflow)
+def summary_params = NfcoreSchema.paramsSummaryMap(workflow, params)
 WorkflowMethylseq.initialise(params, log)
 
 /*
