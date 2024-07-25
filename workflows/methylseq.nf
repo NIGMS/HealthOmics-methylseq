@@ -4,7 +4,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-def summary_params = NfcoreSchema.paramsSummaryMap(workflow)
+def summary_params = paramsSummaryMap(workflow)
 WorkflowMethylseq.initialise(params, log)
 
 /*
