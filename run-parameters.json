@@ -1,0 +1,6 @@
+{
+  "input": "s3://REPLACE-EXAMPLE-BUCKET/sampleSheet-new-data.tsv",
+  "aligner": "bismark",
+  "fasta": " s3://REPLACE-EXAMPLE-BUCKET/sample.fa",
+  "outdir": "methylseq_results"
+}
