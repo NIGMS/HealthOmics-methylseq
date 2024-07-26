@@ -1,6 +1,7 @@
 /*
  * bismark subworkflow
  */
+include { BISMARK_GENOMEPREPARATION                   } from '../../modules/nf-core/bismark/genomepreparation/main'
 include { BISMARK_ALIGN                               } from '../../modules/nf-core/bismark/align/main'
 include { SAMTOOLS_SORT as SAMTOOLS_SORT_ALIGNED      } from '../../modules/nf-core/samtools/sort/main'
 include { SAMTOOLS_SORT as SAMTOOLS_SORT_DEDUPLICATED } from '../../modules/nf-core/samtools/sort/main'
@@ -12,14 +13,21 @@ include { BISMARK_SUMMARY                             } from '../../modules/nf-c
 
 workflow BISMARK {
     take:
-    reads              // channel: [ val(meta), [ reads ] ]
-    bismark_index      // channel: /path/to/BismarkIndex/
-    skip_deduplication // boolean: whether to deduplicate alignments
-    cytosine_report    // boolean: whether the run coverage2cytosine
+    reads  // channel: [ val(meta), [ reads ] ]
 
     main:
     versions = Channel.empty()
 
+    /*
+     * Generate bismark index if not supplied
+     */
+    if (params.bismark_index) {
+        bismark_index = file(params.bismark_index)
+    } else {
+        BISMARK_GENOMEPREPARATION(params.fasta)
+        bismark_index = BISMARK_GENOMEPREPARATION.out.index
+        versions = versions.mix(BISMARK_GENOMEPREPARATION.out.versions)
+    }
 
     /*
      * Align with bismark
@@ -38,7 +46,7 @@ workflow BISMARK {
     )
     versions = versions.mix(SAMTOOLS_SORT_ALIGNED.out.versions)
 
-    if (skip_deduplication) {
+    if (params.skip_deduplication || params.rrbs) {
         alignments = BISMARK_ALIGN.out.bam
         alignment_reports = BISMARK_ALIGN.out.report.map{ meta, report -> [ meta, report, [] ] }
     } else {
@@ -65,7 +73,7 @@ workflow BISMARK {
     /*
      * Run coverage2cytosine
      */
-    if (cytosine_report) {
+    if (params.cytosine_report || params.nomeseq) {
         BISMARK_COVERAGE2CYTOSINE (
             BISMARK_METHYLATIONEXTRACTOR.out.coverage,
             bismark_index
@@ -103,16 +111,20 @@ workflow BISMARK {
     )
     versions = versions.mix(SAMTOOLS_SORT_DEDUPLICATED.out.versions)
 
-    /*
-     * Collect MultiQC inputs
-     */
-    BISMARK_SUMMARY.out.summary.ifEmpty([])
-        .mix(alignment_reports.collect{ it[1] })
-        .mix(alignment_reports.collect{ it[2] })
-        .mix(BISMARK_METHYLATIONEXTRACTOR.out.report.collect{ it[1] })
-        .mix(BISMARK_METHYLATIONEXTRACTOR.out.mbias.collect{ it[1] })
-        .mix(BISMARK_REPORT.out.report.collect{ it[1] })
-        .set{ multiqc_files }
+    if (!params.skip_multiqc) {
+        /*
+        * Collect MultiQC inputs
+        */
+        BISMARK_SUMMARY.out.summary.ifEmpty([])
+            .mix(alignment_reports.collect{ it[1] })
+            .mix(alignment_reports.collect{ it[2] })
+            .mix(BISMARK_METHYLATIONEXTRACTOR.out.report.collect{ it[1] })
+            .mix(BISMARK_METHYLATIONEXTRACTOR.out.mbias.collect{ it[1] })
+            .mix(BISMARK_REPORT.out.report.collect{ it[1] })
+            .set{ multiqc_files }
+    } else {
+        multiqc_files = Channel.empty()
+    }
 
     emit:
     bam        = SAMTOOLS_SORT_ALIGNED.out.bam        // channel: [ val(meta), [ bam ] ] ## sorted, non-deduplicated (raw) BAM from aligner

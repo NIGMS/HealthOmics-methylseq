@@ -14,10 +14,11 @@ keywords:
 tools:
   - methyldackel:
       description: |
-        Read position methylation bias tools from MethylDackel, a (mostly) universal extractor
-        for methyl-seq experiments.
-      homepage: https://github.com/dpryan79/MethylDackel
-      documentation: https://github.com/dpryan79/MethylDackel/blob/master/README.md
+        A (mostly) universal methylation extractor
+        for BS-seq experiments.
+      homepage: https://github.com/brentp/bwa-meth
+      documentation: https://github.com/brentp/bwa-meth
+      arxiv: arXiv:1401.1129
       licence: ["MIT"]
 input:
   - meta:

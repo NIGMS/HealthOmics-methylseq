@@ -2,21 +2,22 @@ process TRIMGALORE {
     tag "$meta.id"
     label 'process_high'
 
-    conda "bioconda::trim-galore=0.6.7"
+    conda (params.enable_conda ? 'bioconda::trim-galore=0.6.7' : null)
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/trim-galore:0.6.7--hdfd78af_0' :
-        'biocontainers/trim-galore:0.6.7--hdfd78af_0' }"
+        'quay.io/biocontainers/trim-galore:0.6.7--hdfd78af_0' }"
 
     input:
     tuple val(meta), path(reads)
 
     output:
-    tuple val(meta), path("*{3prime,5prime,trimmed,val}*.fq.gz"), emit: reads
-    tuple val(meta), path("*report.txt")                        , emit: log     , optional: true
-    tuple val(meta), path("*unpaired*.fq.gz")                   , emit: unpaired, optional: true
-    tuple val(meta), path("*.html")                             , emit: html    , optional: true
-    tuple val(meta), path("*.zip")                              , emit: zip     , optional: true
-    path "versions.yml"                                         , emit: versions
+    tuple val(meta), path("*{trimmed,val}*.fq.gz"), emit: reads
+    tuple val(meta), path("*report.txt")          , emit: log
+    path "versions.yml"                           , emit: versions
+
+    tuple val(meta), path("*unpaired*.fq.gz")     , emit: unpaired, optional: true
+    tuple val(meta), path("*.html")               , emit: html    , optional: true
+    tuple val(meta), path("*.zip")                , emit: zip     , optional: true
 
     when:
     task.ext.when == null || task.ext.when
@@ -37,12 +38,10 @@ process TRIMGALORE {
     // Added soft-links to original fastqs for consistent naming in MultiQC
     def prefix = task.ext.prefix ?: "${meta.id}"
     if (meta.single_end) {
-        def args_list = args.split("\\s(?=--)").toList()
-        args_list.removeAll { it.toLowerCase().contains('_r2 ') }
         """
         [ ! -f  ${prefix}.fastq.gz ] && ln -s $reads ${prefix}.fastq.gz
         trim_galore \\
-            ${args_list.join(' ')} \\
+            $args \\
             --cores $cores \\
             --gzip \\
             ${prefix}.fastq.gz

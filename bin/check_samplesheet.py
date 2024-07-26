@@ -113,6 +113,7 @@ class RowChecker:
                 f"It should be one of: {', '.join(self.VALID_FORMATS)}"
             )
 
+    # TODO: ADD THIS BACK WHEN WE HAVE LANE MERGING?
     def validate_unique_samples(self):
         """
         Assert that the combination of sample name and FASTQ filename is unique.
@@ -158,6 +159,10 @@ def sniff_format(handle):
     peek = read_head(handle)
     handle.seek(0)
     sniffer = csv.Sniffer()
+    # Note: @njspix 04/07/2022: this check produces false negatives. Skip for now, may mature over time...
+    # if not sniffer.has_header(peek):
+    #     logger.critical(f"The given sample sheet does not appear to contain a header.")
+    #     sys.exit(1)
     dialect = sniffer.sniff(peek)
     return dialect
 
@@ -191,14 +196,11 @@ def check_samplesheet(file_in, file_out):
     required_columns = {"sample", "fastq_1", "fastq_2"}
     # See https://docs.python.org/3.9/library/csv.html#id3 to read up on `newline=""`.
     with file_in.open(newline="") as in_handle:
-        dialect = sniff_format(in_handle)
-        logger.info(f"Detected samplesheet format: '{dialect.delimiter}'")
-        reader = csv.DictReader(in_handle, dialect=dialect)
+        reader = csv.DictReader(in_handle, dialect=sniff_format(in_handle))
         # Validate the existence of the expected header columns.
         if not required_columns.issubset(reader.fieldnames):
             req_cols = ", ".join(required_columns)
-            logger.critical(f"The sample sheet **must** contain these column headers: {req_cols}")
-            logger.critical(f"Found the following: {', '.join(reader.fieldnames)}")
+            logger.critical(f"The sample sheet **must** contain these column headers: {req_cols}.")
             sys.exit(1)
         # Validate each row.
         checker = RowChecker()
@@ -243,7 +245,7 @@ def parse_args(argv=None):
         "--log-level",
         help="The desired log level (default WARNING).",
         choices=("CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"),
-        default="INFO",
+        default="WARNING",
     )
     return parser.parse_args(argv)
 
