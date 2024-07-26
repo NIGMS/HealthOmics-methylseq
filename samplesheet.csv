@@ -1,4 +1,0 @@
-sample,fastq_1,fastq_2
-SRX202087_serum,s3://danipan-omx/dna-methyl/SRR8616795_sub_1.fastq.gz,s3://danipan-omx/dna-methyl/SRR8616795_sub_2.fastq.gz
-SRX202088_2i,s3://danipan-omx/dna-methyl/SRR8616796_sub_1.fastq.gz,s3://danipan-omx/dna-methyl/SRR8616796_sub_2.fastq.gz
-SRX271142_2i,s3://danipan-omx/dna-methyl/SRR8616802_sub_1.fastq.gz,s3://danipan-omx/dna-methyl/SRR8616802_sub_2.fastq.gz
