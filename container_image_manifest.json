@@ -2,16 +2,16 @@
     "manifest": [
         "quay.io/biocontainers/bismark:0.24.0--hdfd78af_0",
         "quay.io/biocontainers/bwameth:0.2.2--py_1",
-        "quay.io/biocontainers/fastqc:0.12.1--hdfd78af_0",
+        "quay.io/biocontainers/fastqc:0.11.9--0",
         "quay.io/biocontainers/methyldackel:0.6.0--h22771d5_0",
-        "quay.io/biocontainers/mulled-v2-d3934ca6bb4e61334891ffa2e9a4c87a530e3188:00d3c18496ddf07ea580fd00d1dd203cf31ab630-0",
-        "quay.io/biocontainers/multiqc:1.17--pyhdfd78af_0",
-        "quay.io/biocontainers/multiqc:1.18--pyhdfd78af_0",
-        "quay.io/biocontainers/picard:3.0.0--hdfd78af_1",
+        "quay.io/biocontainers/mulled-v2-d3934ca6bb4e61334891ffa2e9a4c87a530e3188:61f6d4658ac88635fc37623af50bba77561988ab-0",
+        "quay.io/biocontainers/multiqc:1.13--pyhdfd78af_0",
+        "quay.io/biocontainers/picard:2.27.4--hdfd78af_0",
         "quay.io/biocontainers/preseq:3.1.2--h445547b_2",
+        "quay.io/biocontainers/python:3.8.3",
         "quay.io/biocontainers/qualimap:2.2.2d--1",
-        "quay.io/biocontainers/samtools:1.17--h00cdaf9_0",
+        "quay.io/biocontainers/samtools:1.15.1--h1170115_0",
         "quay.io/biocontainers/trim-galore:0.6.7--hdfd78af_0",
-        "quay.io/nf-core/ubuntu:20.04"
+        "ubuntu:20.04"
     ]
 }

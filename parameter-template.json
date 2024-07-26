@@ -15,10 +15,6 @@
         "description": "MultiQC report title. Printed as page header, used for filename if not otherwise specified.",
         "optional": true
     },
-    "test_data_base": {
-        "description": "Base path / URL for data used in the test profiles",
-        "optional": true
-    },
     "save_reference": {
         "description": "Save reference(s) to results directory",
         "optional": true
@@ -151,16 +147,8 @@
         "description": "Ignore read 2 methylation when it overlaps read 1",
         "optional": true
     },
-    "ignore_r1": {
-        "description": "Ignore methylation in first n bases of 5' end of R1",
-        "optional": true
-    },
     "ignore_r2": {
         "description": "Ignore methylation in first n bases of 5' end of R2",
-        "optional": true
-    },
-    "ignore_3prime_r1": {
-        "description": "Ignore methylation in last n bases of 3' end of R1",
         "optional": true
     },
     "ignore_3prime_r2": {
@@ -199,10 +187,6 @@
         "description": "Save files for use with methylKit",
         "optional": true
     },
-    "bamqc_regions_file": {
-        "description": "A GFF or BED file containing the target regions which will be passed to Qualimap/Bamqc.",
-        "optional": true
-    },
     "skip_trimming": {
         "description": "Skip read trimming.",
         "optional": true
@@ -215,56 +199,16 @@
         "description": "Skip MultiQC",
         "optional": true
     },
-    "custom_config_version": {
-        "description": "Git commit id for Institutional configs.",
-        "optional": true
-    },
-    "custom_config_base": {
-        "description": "Base directory for Institutional configs.",
-        "optional": true
-    },
-    "config_profile_name": {
-        "description": "Institutional config name.",
-        "optional": true
-    },
-    "config_profile_description": {
-        "description": "Institutional config description.",
-        "optional": true
-    },
-    "config_profile_contact": {
-        "description": "Institutional config contact information.",
-        "optional": true
-    },
-    "config_profile_url": {
-        "description": "Institutional config URL link.",
-        "optional": true
-    },
-    "max_cpus": {
-        "description": "Maximum number of CPUs that can be requested for any single job.",
-        "optional": true
-    },
-    "max_memory": {
-        "description": "Maximum amount of memory that can be requested for any single job.",
-        "optional": true
-    },
-    "max_time": {
-        "description": "Maximum amount of time that can be requested for any single job.",
-        "optional": true
-    },
-    "ecr_registry": {
-        "description": "Amazon ECR registry to use for container images",
-        "optional": true
-    },
     "help": {
         "description": "Display help text.",
         "optional": true
     },
-    "version": {
-        "description": "Display version and exit.",
-        "optional": true
-    },
     "publish_dir_mode": {
         "description": "Method used to save pipeline results to output directory.",
+        "optional": true
+    },
+    "validate_params": {
+        "description": "Boolean whether to validate parameters against the schema at runtime",
         "optional": true
     },
     "email_on_fail": {
@@ -299,20 +243,52 @@
         "description": "Custom MultiQC yaml file containing HTML including a methods description.",
         "optional": true
     },
-    "validate_params": {
-        "description": "Boolean whether to validate parameters against the schema at runtime",
+    "tracedir": {
+        "description": "Directory to keep pipeline Nextflow logs and reports.",
         "optional": true
     },
-    "validationShowHiddenParams": {
+    "show_hidden_params": {
         "description": "Show all params when using `--help`",
         "optional": true
     },
-    "validationFailUnrecognisedParams": {
-        "description": "Validation of parameters fails when an unrecognised parameter is found.",
+    "enable_conda": {
+        "description": "Run this workflow with Conda. You can also use '-profile condo' instead of providing this parameter.",
         "optional": true
     },
-    "validationLenientMode": {
-        "description": "Validation of parameters in lenient more.",
+    "max_cpus": {
+        "description": "Maximum number of CPUs that can be requested for any single job.",
+        "optional": true
+    },
+    "max_memory": {
+        "description": "Maximum amount of memory that can be requested for any single job.",
+        "optional": true
+    },
+    "max_time": {
+        "description": "Maximum amount of time that can be requested for any single job.",
+        "optional": true
+    },
+    "custom_config_version": {
+        "description": "Git commit id for Institutional configs.",
+        "optional": true
+    },
+    "custom_config_base": {
+        "description": "Base directory for Institutional configs.",
+        "optional": true
+    },
+    "config_profile_name": {
+        "description": "Institutional config name.",
+        "optional": true
+    },
+    "config_profile_description": {
+        "description": "Institutional config description.",
+        "optional": true
+    },
+    "config_profile_contact": {
+        "description": "Institutional config contact information.",
+        "optional": true
+    },
+    "config_profile_url": {
+        "description": "Institutional config URL link.",
         "optional": true
     }
 }
